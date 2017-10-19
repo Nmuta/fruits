@@ -1,5 +1,7 @@
 class FruitsController < ApplicationController
   before_action :set_fruit, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_admin!, :except => 'get_fruits'
+  before_action :bounce_posers, :except => 'get_fruits'
 
   # GET /fruits
   # GET /fruits.json
@@ -72,6 +74,11 @@ class FruitsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_fruit
       @fruit = Fruit.find(params[:id])
+    end
+
+    def bounce_posers
+      redirect_to forbidden_path unless current_admin.email == "nmuta1@gmail.com"
+      # redirect_to login_path unless current_admin.email == "nmuta1@gmail.com"
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
