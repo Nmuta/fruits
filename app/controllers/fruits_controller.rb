@@ -21,6 +21,13 @@ class FruitsController < ApplicationController
   def show
   end
 
+  def get_fruit
+    @fruit = Fruit.find(params[:id])
+    respond_to do |format|
+        format.json { render json: {data: @fruit} }
+    end
+  end
+
   # GET /fruits/new
   def new
     @fruit = Fruit.new

@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :fruits
 
   get 'get_fruits' => 'fruits#get_fruits'
+  
+  get 'get_fruit/:id', to: 'fruits#get_fruit'
   get 'get_categories' => 'categories#get_categories'
 
 
